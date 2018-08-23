@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.mincor.flair"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 10101
+        versionName "1.1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    kotlin { experimental { coroutines 'enable' } }
+    buildToolsVersion '28.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/main.kotlin_module'
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+
+    ///------ RECYCLER VIEW ADAPTER
+    implementation("com.mikepenz:fastadapter:$fastAdapterLib@aar") { transitive = true }
+    implementation "com.mikepenz:fastadapter-commons:$fastAdapterLib@aar"
+    implementation "com.mikepenz:fastadapter-extensions:$fastAdapterLib@aar"
+
+    //--- DI
+    implementation "org.kodein.di:kodein-di-generic-jvm:$kodeinVersion5"
+    implementation "org.kodein.di:kodein-di-framework-android:$kodeinVersion5"
+
+    //----- CONDUCTOR
+    implementation "com.bluelinelabs:conductor:$conductorVersion"
+
+    //----- Event Dispatcher
+    implementation 'com.rasalexman.kdispatcher:kdispatcher:0.1.7'
+
+    //----- RxKotlin
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+
+    // Anko
+    implementation "org.jetbrains.anko:anko:$anko_version"
+
+    // Design
+    implementation "org.jetbrains.anko:anko-design:$anko_version"
+
+    // RecyclerView-v7
+    implementation "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
+    implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
+
+    //------ HTTP
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$retrofitLogginVersion"
+    implementation "ru.gildor.coroutines:kotlin-coroutines-retrofit:$retrofitCoroutinesVersion"
+
+    ///------ VIEWS
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rv_controller" type="id" />
+    <item name="main_item_id" type="id" />
+    <item name="currency_name" type="id" />
+    <item name="currency_value" type="id" />
+    <item name="currency_image" type="id" />
+</resources>
