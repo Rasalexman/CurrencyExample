@@ -1,9 +1,9 @@
 package com.mincor.currency.di.modules
 
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import com.mincor.currency.common.Consts.TAG_SERVER_URL
 import com.mincor.currency.common.log
+import com.mincor.currency.di.interfaces.IWebServerApi
 import com.squareup.moshi.Moshi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -15,9 +15,13 @@ import org.kodein.di.generic.singleton
 import org.kodein.di.generic.with
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.mincor.currency.di.interfaces.IWebServerApi
 import java.io.File
 
+object NetModule {
+    fun isNetworkAvailable(cm: ConnectivityManager?): Boolean = (cm?.activeNetworkInfo?.let {
+            it.isConnected
+        } ?: false)
+}
 
 /**
  * Created by a.minkin on 25.10.2017.
@@ -44,7 +48,7 @@ fun createOkHttpClient(cm: ConnectivityManager?, cachedDir: File): OkHttpClient 
     // add logging as last interceptor
     httpClient.addInterceptor(logging)  // <-- this is the important line!
 
-    /*httpClient.addInterceptor { chain ->
+    httpClient.addInterceptor { chain ->
         var request = chain.request()
         request = if (NetModule.isNetworkAvailable(cm)) {
             // if there is connectivity, we tell the request it can reuse the data for sixty seconds.
@@ -79,7 +83,7 @@ fun createOkHttpClient(cm: ConnectivityManager?, cachedDir: File): OkHttpClient 
         } else {
             originalResponse
         }
-    }*/
+    }
 
     return httpClient.build()
 }
