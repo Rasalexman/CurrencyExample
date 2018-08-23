@@ -18,9 +18,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 
 object NetModule {
-    fun isNetworkAvailable(cm: ConnectivityManager?): Boolean = (cm?.activeNetworkInfo?.let {
-            it.isConnected
-        } ?: false)
+    fun isNetworkAvailable(cm: ConnectivityManager?): Boolean = cm?.activeNetworkInfo?.isConnected ?: false
 }
 
 /**
