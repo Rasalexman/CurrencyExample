@@ -1,2 +1,2 @@
 # CurrencyExample
-Test project with Conductor/Kodein/Retrofit/RxKotlin/Coroutines
+Test project with Conductor/Anko/Kodein/Retrofit/RxKotlin/Coroutines
